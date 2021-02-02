@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-
-
 int main(){
     int n, T;
     scanf("%d", &n);
