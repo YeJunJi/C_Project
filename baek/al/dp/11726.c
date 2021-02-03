@@ -1,26 +1,13 @@
 #include <stdio.h>
 
-unsigned int fac(unsigned int n){
-    if(n==1||n==0){
-        return 1;
-    }
-    return n*fac(n-1);
-}
-
-
 int main(){
-    unsigned int n, sum=0;
+    int n, ans[1001]={0};
     scanf("%d", &n);
-    int vertical = n;
-    int horizon = 0;
-    for(;vertical>=0;vertical-=2, horizon++){
-        if(vertical==0||horizon==0){
-            sum++;
-        }
-        else{
-            sum += fac(vertical+horizon)/(fac(vertical)*fac(horizon));
-        }
-        printf("currnet sum : %d\n", sum);
+
+    ans[0]=1;
+    ans[1]=1;
+    for(int i=2;i<=n;i++){
+        ans[i] = (ans[i-1]+ans[i-2])%10007;
     }
-    printf("final : %d", sum%10007);
+    printf("%d", ans[n]);
 }
