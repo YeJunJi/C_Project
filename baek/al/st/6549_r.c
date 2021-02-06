@@ -18,9 +18,11 @@ int main(){
             scanf("%d", &height[i]);
         }
         for(int i=0;i<n;i++){
-            if(p==0||st[p].value<height[i]){
+            if(p==0||st[p-1].value<height[i]){
                 st[p].index = i;
                 st[p++].value = height[i];
+            }
+            else if(st[p-1].value>height[i]){
             }
         }
     }
