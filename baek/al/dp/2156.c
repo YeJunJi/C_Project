@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-typedef struct {
+typedef struct{
     int one;
     int two;
-} dp1;
+} drink;
 
-int max(int a, int b){
+int maximum(int a, int b){
     if(a>b){
         return a;
     }
@@ -14,33 +14,47 @@ int max(int a, int b){
     }
 }
 
+int search(int i, drink dp[]){
+    int max=0;
+    while(i-2>=0){
+        int tmp = maximum(dp[i-2].one, dp[i-2].two);
+        max = maximum(tmp, max);
+        i--;
+    }
+    return max;
+}
+
 int main(){
-    int n, stair[10001]={0}, maximum = 0;
+    int n, start=0, max=0;
     scanf("%d", &n);
+    int input[n];
     for(int i=0;i<n;i++){
-        scanf("%d", &stair[i]);
+        scanf("%d", &input[i]);
     }
-    
-    dp1 dp[n];
-    dp[0].one=stair[0]; dp[0].two=0;
-    int tmp = max(dp[0].one,dp[1].two);
-    if(maximum<tmp){
-        maximum = tmp;
-    }
-    if(n!=1){
-        dp[1].one = stair[1]; dp[1].two = dp[0].one+stair[1];
-        int tmp = max(dp[1].one,dp[1].two);
-        if(maximum<tmp){
-            maximum = tmp;
+    drink dp[n];
+    for(int i=0;i<n;i++){
+        if(input[i]!=0){
+            start = i;
+            break;
         }
     }
-    for(int i=2;i<n;i++){
-        dp[i].one = max(dp[i-2].one, dp[i-2].two)+stair[i];
-        dp[i].two = dp[i-1].one+stair[i];
-        int tmp = max(dp[i].one,dp[i].two);
-        if(maximum<tmp){
-            maximum = tmp;
-        }
+
+    dp[start].one = input[start]; dp[start].two = 0;
+    dp[start+1].one = input[start+1]; dp[start+1].two = dp[start].one+input[start+1];
+    if(n-start==1){
+        max = maximum(dp[start].one, dp[start].two);
     }
-    printf("%d\n", maximum);
+    else{
+        max = maximum(dp[start].one, dp[start].two);
+        int tmp = maximum(dp[start+1].one, dp[start+1].two);
+        max = maximum(max, tmp);
+    }
+    for(int i=start+2;i<n;i++){
+        dp[i].one = search(i, dp)+input[i];
+        dp[i].two = dp[i-1].one+input[i];
+
+        int tmp = maximum(dp[i].one, dp[i].two);
+        max = maximum(tmp, max);
+    }
+    printf("%d", max);
 }
