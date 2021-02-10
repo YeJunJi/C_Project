@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+typedef struct{
+    int value;
+    int index;
+} stack;
+
+
+int main(){
+    int n, p=0, input[1000001]={0};
+    scanf("%d", &n);
+    for(int i=0; i<n;i++){
+        scanf("%d", &input[i]);
+    }
+
+    stack st[1000001];
+    for(int i=0; i<n; i++){
+        if(i==0 || st[p-1].value>=input[i]){
+            st[p].index = i;
+            st[p++].value = input[i];
+        }
+        else{
+            while(st[p-1].value<input[i]){
+                input[st[--p].index] = input[i];
+            }
+            st[p].index = i;
+            st[p++].value = input[i];
+        }
+    }
+    for(int i=0;i<n;i++){
+        printf("%d ", input[i]);
+    }
+    
+}
