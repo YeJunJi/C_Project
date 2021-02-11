@@ -13,7 +13,8 @@ int main(){
         scanf("%d", &input[i]);
     }
 
-    stack st[1000001];
+    stack st[n];
+
     for(int i=0; i<n; i++){
         if(i==0 || st[p-1].value>=input[i]){
             st[p].index = i;
@@ -21,12 +22,22 @@ int main(){
         }
         else{
             while(st[p-1].value<input[i]){
+                if(p==0){
+                    break;
+                }
                 input[st[--p].index] = input[i];
             }
             st[p].index = i;
             st[p++].value = input[i];
         }
     }
+    if(p>0){
+        while(p>0){
+            input[st[--p].index] = -1;
+        }
+    }
+    input[n-1] = -1;
+
     for(int i=0;i<n;i++){
         printf("%d ", input[i]);
     }
