@@ -20,7 +20,7 @@ int main(){
             }
             else if(st[q-1]=='*'||st[q-1]=='/'){
                 while(1){
-                    if(q==0){
+                    if(q==0||st[q-1]=='('){
                         break;
                     }
                     printf("%c", st[q-1]);
