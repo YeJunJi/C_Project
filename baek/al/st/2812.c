@@ -1,39 +1,29 @@
 #include <stdio.h>
 
 int main(){
-    int n, k, input, p=0;
+    int n, k, p=0;
     scanf("%d %d", &n, &k);
-    scanf("%d", &input);
+    char input[500000]={0}, st[500000]={0};
     int tmp = k;
-    int stack[500000], inputnum[500000];
-    for(int i=n-1;i>=0;i--){
-        inputnum[i] = input%10;
-        input/=10;
-        stack[i] = -1;
-    }
+    scanf("%s", input);
     for(int i=0;i<n;i++){
-        if(p==0){
-            stack[p++]=inputnum[i];
+        if(p==0||st[p-1]>=input[i]){
+            st[p++] = input[i];
         }
-        else if(stack[p-1]<inputnum[i]){
-            if(k==0){
-                stack[p++]=inputnum[i];
-            }else{
-                while(stack[p-1]<inputnum[i]){
-                    if(k==0||p==0){
-                        break;
-                    }
-                    stack[--p]=-1;
+        else if(st[p-1]<input[i]){
+            while(k>0){
+                if(st[p-1]==0||st[p-1]>=input[i]){
+                    break;
+                }
+                else if(st[p-1]<input[i]){
+                    st[--p] = 0;
                     k--;
                 }
-                stack[p++] = inputnum[i];
             }
-        }
-        else{
-            stack[p++]=inputnum[i];
+            st[p++] = input[i];
         }
     }
-    for(int j=0;j<n-tmp;j++){
-        printf("%d", stack[j]);
+    for(int i=0;i<n-tmp;i++){
+        printf("%c", st[i]);
     }
 }
