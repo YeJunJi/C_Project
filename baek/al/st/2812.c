@@ -3,7 +3,7 @@
 int main(){
     int n, k, p=0;
     scanf("%d %d", &n, &k);
-    char input[500000]={0}, st[500000]={0};
+    char input[500001]={0}, st[500001]={0};
     int tmp = k;
     scanf("%s", input);
     for(int i=0;i<n;i++){
