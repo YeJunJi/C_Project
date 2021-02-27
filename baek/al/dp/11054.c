@@ -23,22 +23,26 @@ int main(){
         scanf("%d", &s[i].data);
         s[i].up=1; s[i].down=1;
     }
-    for(int i=0;i<n;i++){
-        for(int j=0;j<i;j++){
-            if(s[j].data<s[i].data){
-                if(s[j].up>=s[i].up){
-                    s[i].up = s[j].up+1;
-                }
-            }
-        }
-        for(int j=i+1;j<n;j++){
+    for(int i=n-1;i>=0;i--){
+        for(int j=n-1;j>=i;j--){
             if(s[j].data<s[i].data){
                 if(s[j].down>=s[i].down){
                     s[i].down = s[j].down+1;
                 }
             }
         }
-        max = maximum(max, s[i].up+s[i].down);
-        printf("%d: %d %d\n", i,s[i].up, s[i].down);
     }
+    for(int i=0;i<n;i++){
+        for(int j=0;j<=i;j++){
+            if(s[j].data<s[i].data){
+                if(s[j].up>=s[i].up){
+                    s[i].up = s[j].up+1;
+                }
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        max = maximum(max, s[i].up+s[i].down-1);
+    }
+    printf("%d\n", max);
 }
