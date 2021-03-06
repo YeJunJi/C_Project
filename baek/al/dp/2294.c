@@ -16,6 +16,7 @@ int main(){
             }
         }
     }
+    
     if(dp[k]==10001){
         printf("-1\n");
     }
