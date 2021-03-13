@@ -1,4 +1,5 @@
 #include <stdio.h>
+//dfs를 이용한 풀이 하지만 완전탐색의 경우 시간초과
 
 int maximum(int a, int b){
     if(a>b){
