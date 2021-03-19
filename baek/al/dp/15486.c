@@ -25,8 +25,5 @@ int main(){
             dp[i+a[i][0]] = maximum(dp[i+a[i][0]], max+a[i][1]);
         }
     }
-    for(int i=0;i<n;i++){
-        printf("%d ", dp[i]);
-    }
     printf("%d\n", max);
 }
