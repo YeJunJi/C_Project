@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-//LCS대표 문제 복습 필요
+
 int max(int a, int b){
     if(a>b){
         return a;
